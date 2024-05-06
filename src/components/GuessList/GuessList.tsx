@@ -37,8 +37,16 @@ const GuessListItem: React.FC<{ guess: GuessCreature, rightGuess: Creature}> = (
             </ul>
             <p className={Creature.dlc == rightGuess.dlc ? "correct-guess attributes": "wrong-guess attributes"}>{Creature.dlc}</p>
             <p className={Creature.edible == rightGuess.edible ? "correct-guess attributes": "wrong-guess attributes"}>{Creature.edible}</p>
-            <p style={{backgroundColor: Creature.cooking_effect == rightGuess.cooking_effect ? 'green' : 'red', width: '100px', height: '100px', margin: '5px', display: 'inline-block', textAlign: 'center'}}>{Creature.cooking_effect}</p>
-            <p style={{backgroundColor: Creature.hearts_recovered == rightGuess.hearts_recovered ? 'green' : 'red', width: '100px', height: '100px', margin: '5px', display: 'inline-block', textAlign: 'center'}}>{Creature.hearts_recovered}</p>
+            <p className={Creature.cooking_effect == rightGuess.cooking_effect ? "correct-guess attributes": "wrong-guess attributes"}>{Creature.cooking_effect}</p>
+            <p className={
+                rightGuess.edible ? 
+                    Creature.edible?
+                        Creature.hearts_recovered == rightGuess.hearts_recovered ? "correct-guess attributes" : "wrong-guess attributes"
+                    : rightGuess.hearts_recovered == 0 ? "correct-guess attributes" : "wrong-guess attributes"
+                : Creature.edible?
+                    Creature.hearts_recovered == 0 ? "correct-guess attributes" : "wrong-guess attributes"
+                : "correct-guess attributes"
+            }>{Creature.edible ? Creature.hearts_recovered : 0}</p>
     </div>
   );
 };

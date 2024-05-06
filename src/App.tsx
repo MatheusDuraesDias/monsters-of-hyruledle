@@ -17,6 +17,8 @@ export interface Creature {
   image: string;
 }
 
+// IMPORTANTE: se edible for false hearts recovered devera ser definido como 0, talvez abandonar hearts_recovered
+
 export interface GuessCreature {
   Creature: Creature;
   correct: boolean;

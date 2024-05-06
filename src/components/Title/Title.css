@@ -1,0 +1,13 @@
+@font-face {
+  font-family: zelda;
+  src: url(../../assets/zelda.otf);
+}
+
+.title-hyruledle {
+  margin: 0;
+  padding-top: 15vh;
+  font-family: zelda;
+  font-size: 100px;
+  font-weight: bold;
+  color: #FAF7DF;
+}

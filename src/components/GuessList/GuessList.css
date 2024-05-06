@@ -1,0 +1,25 @@
+.list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.attributes {
+    width: 100px;
+    height: 10px;
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+}
+
+.correct-guess {
+    background-color: green;
+}
+
+.wrong-guess {
+    background-color: red;
+}
+
+.mid-guess {
+    background-color: yellow;
+}

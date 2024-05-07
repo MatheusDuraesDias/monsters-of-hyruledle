@@ -1,4 +1,63 @@
-.list {
+.list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.attributes-names {
+    align-items: center;
+}
+
+.list-item {
+    align-items: center;
+    justify-content: space-between;
+    width: 80vw;
+    height: auto;
+    border-radius: 5px;
+    display: flex;
+}
+
+.attributes {
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.469), 1px 1px 1px rgba(0, 0, 0, 0.469);
+    flex: 1;
+    margin-top: 5px;
+    padding: 10px;
+    height: 100%;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+.correct-guess {
+    border: black solid 1px;
+    align-items: center;
+    background-color: green;
+}
+
+.wrong-guess {
+    border: black solid 1px;
+    background-color: red;
+}
+
+.mid-guess {
+    border: black solid 1px;
+    color: black;
+    text-shadow: 1px 1px 1px rgba(204, 204, 204, 0.469), 1px 1px 1px rgba(204, 204, 204, 0.469);
+    background-color: yellow;
+}
+
+/* .img-container {
+    text-align: center; 
+} */
+
+.img-container img {
+    max-width: 135px;
+    max-height: 175px;
+    border-radius: 5px;
+}
+
+
+/* .list {
     margin: 0;
     padding: 0;
     list-style-type: none;
@@ -23,3 +82,5 @@
 .mid-guess {
     background-color: yellow;
 }
+
+*/

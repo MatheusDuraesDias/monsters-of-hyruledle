@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Title from './components/Title/Title';
-import Input from './components/Input/Input';
 import SubmitButton from './components/Submit/submit';
+import GuessList from './components/GuessList/GuessList';
 
 export interface Creature {
   id: number;
@@ -16,8 +16,6 @@ export interface Creature {
   hearts_recovered: number;
   image: string;
 }
-
-// IMPORTANTE: se edible for false hearts recovered devera ser definido como 0, talvez abandonar hearts_recovered
 
 export interface GuessCreature {
   Creature: Creature;
@@ -43,23 +41,91 @@ export async function searchAllMonsters (){
     }
 }
 
-async function fetchCreatures(): Promise<{creatures: Creature[], todaysCreature: Creature}>{
-
+async function fetchCreatures(): Promise<{ creatures: Creature[], todaysCreature: Creature }> {
       const creatures: Creature[] = await searchAllMonsters();
       console.log(creatures);
       let todaysCreature = creatures[Math.floor(Math.random() * creatures.length)]
       return {creatures, todaysCreature};
 }
 
+async function justLetMeFeeeeeetch() {
 
-async function App() {
-  const {creatures, todaysCreature} = await fetchCreatures();
+  // const [creaturesValue, setCreatures] = useState<Creature[]>([]);
+  // const [todaysCreatureValue, setTodaysCreature] = useState<Creature | null>(null);
+
+  // const { creatures, todaysCreature } = await fetchCreatures();
+  // setCreatures(creatures);
+  // setTodaysCreature(todaysCreature);
+
+  // return { creaturesValue, todaysCreatureValue };
+}
+
+function App() {
+
+  const [creaturesValue, setCreatures] = useState<Creature[]>([]);
+  const [todaysCreatureValue, setTodaysCreature] = useState<Creature | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { creatures, todaysCreature } = await fetchCreatures();
+        setCreatures(creatures);
+        setTodaysCreature(todaysCreature);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // const rightGuess = todaysCreatureValue;
+  // const someGuesses = creaturesValue
+  const rightGuess = {
+    id: 3,
+    name: 'Right Monster',
+    category: 'Right Category',
+    common_locations: ['Right Location'],
+    description: 'Description of the right monster',
+    dlc: true,
+    edible: false,
+    cooking_effect: 'Right Cooking Effect',
+    hearts_recovered: 5,
+    image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
+  };
+
+  const someGuesses = [
+    {Creature:{
+    id: 3,
+    name: 'Right Monster',
+    category: 'Right Category',
+    common_locations: ['Right Location', "among us", "among uk", "make it wrong", "make it wrong", "make it wrong"],
+    description: 'Description of the right monster',
+    dlc: true,
+    edible: false,
+    cooking_effect: 'Right Cooking Effect',
+    hearts_recovered: 5,
+    image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
+  }, correct: false},
+  {Creature:{
+    id: 3,
+    name: 'Right Monster',
+    category: 'Right Category',
+    common_locations: ['Right Location'],
+    description: 'Description of the right monster',
+    dlc: true,
+    edible: false,
+    cooking_effect: 'Right Cooking Effect',
+    hearts_recovered: 5,
+    image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
+  }, correct: false}];
+
+
 
   return (
       <div className="background-container">
         <Title title='Monsters of Hyruledle'/>
-        <SubmitButton/>
-        <Input type='text' placeholder='bokoblin...' onChange={function (){}}/>
+      <SubmitButton />
+      <GuessList guessedMonsters={someGuesses} rightGuess={rightGuess}></GuessList>
       </div>
   );
 }

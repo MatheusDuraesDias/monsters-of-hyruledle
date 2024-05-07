@@ -30,56 +30,56 @@ function isResponseData(data: any): data is ResponseData {
     return Array.isArray(data.data);
 }
 
-export async function searchAllMonsters (){
+const [creatures, setCreature] = React.useState<Creature[]>([]);
+
+async function searchAllMonsters() {
     const request = await fetch("https://botw-compendium.herokuapp.com/api/v3/compendium/category/creatures");
     const response = await request.json();
     if (isResponseData(response)){
-      return response.data;
+      setCreature(response.data)
     }
     else{
       throw new Error("Invalid data structure");
     }
 }
 
-async function fetchCreatures(): Promise<{ creatures: Creature[], todaysCreature: Creature }> {
-      const creatures: Creature[] = await searchAllMonsters();
-      console.log(creatures);
+function fetchCreatures(): { creatures: Creature[], todaysCreature: Creature } {
       let todaysCreature = creatures[Math.floor(Math.random() * creatures.length)]
       return {creatures, todaysCreature};
 }
 
-async function justLetMeFeeeeeetch() {
+// async function justLetMeFeeeeeetch() {
+
+//   // const [creaturesValue, setCreatures] = useState<Creature[]>([]);
+//   // const [todaysCreatureValue, setTodaysCreature] = useState<Creature | null>(null);
+
+//   // const { creatures, todaysCreature } = await fetchCreatures();
+//   // setCreatures(creatures);
+//   // setTodaysCreature(todaysCreature);
+
+//   // return { creaturesValue, todaysCreatureValue };
+// }
+
+function App() {
+
+  const { creatures, todaysCreature } = fetchCreatures();
 
   // const [creaturesValue, setCreatures] = useState<Creature[]>([]);
   // const [todaysCreatureValue, setTodaysCreature] = useState<Creature | null>(null);
 
-  // const { creatures, todaysCreature } = await fetchCreatures();
-  // setCreatures(creatures);
-  // setTodaysCreature(todaysCreature);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     try {
+  //       const { creatures, todaysCreature } = await fetchCreatures();
+  //       setCreatures(creatures);
+  //       setTodaysCreature(todaysCreature);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   }
+  //   fetchData();
+  // }, []);
 
-  // return { creaturesValue, todaysCreatureValue };
-}
-
-function App() {
-
-  const [creaturesValue, setCreatures] = useState<Creature[]>([]);
-  const [todaysCreatureValue, setTodaysCreature] = useState<Creature | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const { creatures, todaysCreature } = await fetchCreatures();
-        setCreatures(creatures);
-        setTodaysCreature(todaysCreature);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchData();
-  }, []);
-
-  // const rightGuess = todaysCreatureValue;
-  // const someGuesses = creaturesValue
   const rightGuess = {
     id: 3,
     name: 'Right Monster',
@@ -125,7 +125,7 @@ function App() {
       <div className="background-container">
         <Title title='Monsters of Hyruledle'/>
       <SubmitButton />
-      <GuessList guessedMonsters={someGuesses} rightGuess={rightGuess}></GuessList>
+      <GuessList guessedMonsters={someGuesses} rightGuess={todaysCreature}></GuessList>
       </div>
   );
 }

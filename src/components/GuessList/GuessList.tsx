@@ -9,7 +9,44 @@ interface GuessListProps {
 const GuessListItem: React.FC<{ guess: GuessCreature, rightGuess: Creature}> = ({ guess, rightGuess }) => {
     const { Creature, correct } = guess;
 
-    const hasCommonLocation = Creature.common_locations.some(location => rightGuess.common_locations.includes(location));
+    const [location, setLocation] = React.useState<number[]>([]);
+
+    const verifyLocations = (): number => {
+
+        var igual = true
+        var temLocation = 0
+
+        Creature.common_locations.forEach(location => {
+            if(rightGuess.common_locations.includes(location)){
+                temLocation = 1
+            }
+        })
+
+        if(Creature.common_locations.length >= rightGuess.common_locations.length){
+            Creature.common_locations.forEach(location => { 
+                if (!rightGuess.common_locations.includes(location)) {
+                    igual = false
+                }
+            })
+        } else {
+            rightGuess.common_locations.forEach(location => { 
+                if (!Creature.common_locations.includes(location)) {
+                    igual = false
+                }
+            })
+        }
+        
+
+        if(temLocation == 1 && !igual) {
+            temLocation = 1
+        }
+
+        if(igual) {
+            temLocation = 2
+        }
+
+        return temLocation
+    }
 
     return (
         <div className={`list-item`}>
@@ -18,13 +55,14 @@ const GuessListItem: React.FC<{ guess: GuessCreature, rightGuess: Creature}> = (
             </div>
             <p className={Creature.name == rightGuess.name ? "correct-guess attributes": "wrong-guess attributes"}>{Creature.name}</p>
             <p className={Creature.category == rightGuess.category ? "correct-guess attributes": "wrong-guess attributes"}>{Creature.category}</p>
-            <ul className={Creature.common_locations == rightGuess.common_locations ? "correct-guess attributes": hasCommonLocation ? "mid-guess attributes" : "wrong-guess attributes"}>
+            <ul className={
+                verifyLocations() === 2 ? "correct-guess attributes": verifyLocations() === 1 ? "mid-guess attributes" : "wrong-guess attributes"}>
                 {Creature.common_locations.map((location, index) => (
                     <li key={index}>{location}</li>
                 ))}
             </ul>
             <p className={Creature.dlc == rightGuess.dlc ? "correct-guess attributes" : "wrong-guess attributes"}>{Creature.dlc ? "yes" : "no"}</p>
-            <p className={Creature.edible == rightGuess.edible ? "correct-guess attributes" : "wrong-guess attributes"}>{Creature.edible ? "yes" : "no"}</p>
+            {/* <p className={Creature.edible == rightGuess.edible ? "correct-guess attributes" : "wrong-guess attributes"}>{Creature.edible ? "yes" : "no"}</p> */}
             <p className={
                 rightGuess.edible ?
                     Creature.edible ?
@@ -51,19 +89,19 @@ const GuessList: React.FC<{guessedMonsters: GuessCreature[], rightGuess: Creatur
   return (
       <div className='list-container'>
           <div className='list-item attributes-names list-container'>
-              <p className='attributes'>Image</p>
-              <p className='attributes'>Name</p>
-              <p className='attributes'>Category</p>
-              <div className='attributes'>
+              <p className='title'>Image</p>
+              <p className='title'>Name</p>
+              <p className='title'>Category</p>
+              <div className='title'>
                   <p>Common </p>
                   <p>Locations</p>
-              </div>              <p className='attributes'>DLC?</p>
-              <p className='attributes'>Edible?</p>
-              <div className='attributes'>
+              </div>              <p className='title'>DLC?</p>
+              {/* <p className='title'>Edible?</p> */}
+              <div className='title'>
                   <p>Cooking </p>
                   <p>Effect</p>
               </div>
-              <div className='attributes'>
+              <div className='title'>
                   <p>Hearts </p>
                   <p>Recovered</p>
               </div>

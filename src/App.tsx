@@ -89,7 +89,7 @@ function App() {
     dlc: true,
     edible: false,
     cooking_effect: 'Right Cooking Effect',
-    hearts_recovered: 5,
+    hearts_recovered: 0,
     image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
   };
 
@@ -101,7 +101,7 @@ function App() {
     common_locations: ['Right Location', "among us", "among uk", "make it wrong", "make it wrong", "make it wrong"],
     description: 'Description of the right monster',
     dlc: true,
-    edible: false,
+    edible: true,
     cooking_effect: 'Right Cooking Effect',
     hearts_recovered: 5,
     image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
@@ -113,7 +113,7 @@ function App() {
     common_locations: ['Right Location'],
     description: 'Description of the right monster',
     dlc: true,
-    edible: false,
+    edible: true,
     cooking_effect: 'Right Cooking Effect',
     hearts_recovered: 5,
     image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',

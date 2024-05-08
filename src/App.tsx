@@ -80,19 +80,20 @@ function App() {
   //   fetchData();
   // }, []);
 
-  const rightGuess = {
-    id: 3,
-    name: 'Right Monster',
-    category: 'Right Category',
-    common_locations: ['Right Location'],
-    description: 'Description of the right monster',
-    dlc: true,
-    edible: false,
-    cooking_effect: 'Right Cooking Effect',
-    hearts_recovered: 0,
-    image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
-  };
+  // const rightGuess = {
+  //   id: 3,
+  //   name: 'Right Monster',
+  //   category: 'Right Category',
+  //   common_locations: ['Right Location'],
+  //   description: 'Description of the right monster',
+  //   dlc: true,
+  //   edible: false,
+  //   cooking_effect: 'Right Cooking Effect',
+  //   hearts_recovered: 0,
+  //   image: 'https://botw-compendium.herokuapp.com/api/v3/compendium/entry/bladed_rhino_beetle/image',
+  // };
 
+  //guess mocks
   const someGuesses = [
     {Creature:{
     id: 3,
